@@ -1,1 +1,0 @@
-# spider_task_2_appdev
