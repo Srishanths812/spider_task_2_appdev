@@ -7,10 +7,10 @@ import Search from './Pages/Search';
 import Group from './Pages/group_create';
 import Groupdetails from './Pages/group';
 import Profile from './Pages/Profiledetails';
-import Internet from './Pages/internet';
 
 function App(){
   const [loading, setLoading]=useState(true);
+  const [online, setOnline]=useState(navigator.onLine);
   useEffect(()=>{
     const time=setTimeout(()=> setLoading(false),3000);
     return ()=> clearTimeout(time);
@@ -26,7 +26,6 @@ function App(){
   }
   return(
     <Routes>
-      <Route element={<Internet />}>
         <Route path='/'element={<Log />} />
         <Route path='/signup' element={<Sign />} />
         <Route path='/main' element={<MainPage />} />
@@ -34,7 +33,6 @@ function App(){
         <Route path='/group_create' element={<Group />} />
         <Route path='/group' element={<Groupdetails />} />
         <Route path='/profile' element={<Profile />} />
-      </Route>
     </Routes>
   )
 }
