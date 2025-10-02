@@ -118,6 +118,10 @@ const Group=() =>{
                 setSplit({});
                 return toast.error("Sum of Percentage Cannot be Greater than 100")
             }
+            else if (sum<100){
+                setSplit({});
+                return toast.error("Sum of Percentage Cannot be lesser than than 100")
+            }
             const lists=await fetch(`${Backend_URL}/addexpense`,{
                 method: "POST",
                 headers: {
