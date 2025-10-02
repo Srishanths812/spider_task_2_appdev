@@ -15,6 +15,7 @@ function Header() {
     const [dp, setDp] = useState('');
 
     useEffect(() => {
+      console.log(Backend_URL)
       const fetchDP = async () => {
           const res = await fetch(Backend_URL+"/profile_details", {
               method: "POST",
@@ -106,19 +107,21 @@ function Header() {
               tabIndex="0"
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
               <h1 className="text-xl p-3">{names}</h1>
-              <li>
-                <a className="justify-between" onClick={() => Navigate("/")}>
-                  Logout
-                </a>
-              </li>
               <li><a onClick={() => Navigate("/profile")}>Change Profile Details</a></li>
               <li>
                 <a>
-                  <button className="text-xs max-w-21 btn bg-red-500 text-white" onClick={()=> document.getElementById('my_modal_1').showModal()}>
+                  <button onClick={()=> document.getElementById('my_modal_1').showModal()}>
                     Delete Account
                   </button>
                 </a>
               </li>
+              <div className="gird place-items-center py-2">
+              <li>
+                <a className="w-20 btn bg-red-500 text-white" onClick={() => Navigate("/")}>
+                  Logout
+                </a>
+              </li>
+              </div>
             </ul>
             <dialog id='my_modal_1' className="modal">
               <div className="modal-box">

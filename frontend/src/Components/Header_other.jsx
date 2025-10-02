@@ -11,12 +11,11 @@ function Header() {
     const link=new URLSearchParams(location.search);
     const initialvalue=link.get("username") || '';
     const [searchkey, setSearchKey]=useState(initialvalue);
-    const Backend_URL=import.meta.env.backend_url;
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     const [dp, setDp] = useState('');
 
     useEffect(() => {
-      console.log(import.meta.env.backend_url)
       const fetchDP = async () => {
           const res = await fetch(Backend_URL+"/profile_details", {
               method: "POST",
