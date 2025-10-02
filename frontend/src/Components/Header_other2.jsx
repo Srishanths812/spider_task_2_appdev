@@ -16,7 +16,7 @@ function Header() {
 
     useEffect(() => {
       const fetchDP = async () => {
-          const res = await fetch("http://localhost:3000/profile_details", {
+          const res = await fetch(Backend_URL+"/profile_details", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json"
