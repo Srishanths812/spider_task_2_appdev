@@ -138,7 +138,7 @@ const groupSchema= new mongoose.Schema({
         }
     ]
 });
-const Group=mongoose.model("GroupsV2",groupSchema);
+const Group=mongoose.model("GroupsV3",groupSchema);
 
 //for authorizing all pages using JWT
 function verify(req,res,next){
