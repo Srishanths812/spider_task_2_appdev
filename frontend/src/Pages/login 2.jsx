@@ -13,7 +13,7 @@ const Login =()=>{
     const [password, setPassword]= useState('');
     const [message, setMessage]= useState('');
 
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     const formHandle= async(e)=>{
         e.preventDefault();

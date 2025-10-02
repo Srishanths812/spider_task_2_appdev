@@ -7,7 +7,7 @@ function group_info() {
     const [result, setResult]= useState([]);
     //groupName actually contains the name of people in the group. group input contains the group name given as input
     const [groupName, setgroupName]=useState([localStorage.getItem("Username")],);
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
     const [groupinput, setGroupinput]=useState('');
 
     const groupData={

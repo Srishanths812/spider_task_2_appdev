@@ -11,11 +11,12 @@ function Header() {
     const link=new URLSearchParams(location.search);
     const initialvalue=link.get("username") || '';
     const [searchkey, setSearchKey]=useState(initialvalue);
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.backend_url;
 
     const [dp, setDp] = useState('');
 
     useEffect(() => {
+      console.log(import.meta.env.backend_url)
       const fetchDP = async () => {
           const res = await fetch("http://localhost:3000/profile_details", {
               method: "POST",
@@ -60,12 +61,14 @@ function Header() {
     //when typed on search bar when in /main, the page goes to /search
     //but here u can't type as it is in the input box cause things have changed
     //so when it changes, i focus the input box so that we can continously type
+
     useEffect(()=>{
         if (initialvalue !=='' && inputbox.current){
             inputbox.current.focus();
         }
     }, [initialvalue]);
 
+    
     useEffect(()=>{
         const timeout=setTimeout(()=>{
             if (searchkey.trim() !== ''){

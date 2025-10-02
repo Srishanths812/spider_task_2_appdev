@@ -15,7 +15,7 @@ function profile(){
     const [confirmPass,setConfirmpass]=useState('');
     const [dp,setdp]=useState(null)
     const Navigate=useNavigate();
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
     const fileInputRef=useRef(null);
     const MyName=localStorage.getItem("Username")
     

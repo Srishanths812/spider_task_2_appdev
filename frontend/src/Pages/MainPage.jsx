@@ -12,7 +12,7 @@ const MainPage=()=>{
     const [message, setMessage]= useState('');
 
     const Navigate=useNavigate();
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     useEffect(()=>{
         const fetchMessage=async()=>{
@@ -36,7 +36,6 @@ const MainPage=()=>{
                 setMessage("Error");
             }
         };
-        fetchMessage();
     },[Navigate]);
     return(
         <div className="min-h-screen w-full flex items-center justify-center bg-slate-100 p-4 font-sans">

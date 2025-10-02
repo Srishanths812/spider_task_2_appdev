@@ -13,7 +13,7 @@ const Search=()=>{
     const location=useLocation();
     const link=new URLSearchParams(location.search);
     const username=link.get("username")||'';
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     const AddFriend=async(name)=>{
       try{

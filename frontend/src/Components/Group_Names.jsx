@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function Groups() {
     const [result, setResult]= useState([]);
     const Navigate=useNavigate();
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
     const MyName=localStorage.getItem("Username")
 
 

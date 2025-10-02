@@ -12,7 +12,7 @@ const MainPage=()=>{
     const [message, setMessage]= useState('');
 
     const Navigate=useNavigate();
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     useEffect(()=>{
         const fetchMessage=async()=>{

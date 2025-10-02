@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 function Friend() {
     const [result, setResult]= useState([]);
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
     const AddFriend=async()=>{
       try{
         const lists=await fetch(`${Backend_URL}/friend`,{

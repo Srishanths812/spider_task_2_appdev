@@ -17,7 +17,7 @@ const Group=() =>{
     const Navigate=useNavigate();
     const link=new URLSearchParams(location.search);
     const groupId=link.get("groupId")||'';
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     function topay(){
         let pay=0;

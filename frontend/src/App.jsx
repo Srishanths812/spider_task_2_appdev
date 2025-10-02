@@ -8,6 +8,7 @@ import Group from './Pages/group_create';
 import Groupdetails from './Pages/group';
 import Profile from './Pages/Profiledetails';
 import Internet from './Pages/internet';
+import ForgotPassword from './Pages/forgotpassword';
 
 function App(){
   const [loading, setLoading]=useState(true);
@@ -29,6 +30,7 @@ function App(){
       <Route element={<Internet />}>
         <Route path='/'element={<Log />} />
         <Route path='/signup' element={<Sign />} />
+        <Route path='/forgotpassword'element={<ForgotPassword />} />
         <Route path='/main' element={<MainPage />} />
         <Route path='/search' element={<Search />} />
         <Route path='/group_create' element={<Group />} />

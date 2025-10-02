@@ -28,12 +28,12 @@ const userSchema= new mongoose.Schema({
         required: true,
         lowercase: true,
     },
-    // email:{
-    //     type:String,
-    //     unique:true,
-    //     required: true,
-    //     lowercase: true,
-    // },
+    email:{
+        type:String,
+        unique:true,
+        required: true,
+        lowercase: true,
+    },
     password: {
         type: String,
         required: true,
@@ -59,7 +59,7 @@ const userSchema= new mongoose.Schema({
 userSchema.pre('deleteOne',{ document: true, query: false }, async function (next){
     const username_remove=this.username;
      try {
-        await this.model('Users').updateMany(
+        await this.model('UsersV2').updateMany(
             { $or: [{ friends: username_remove }, { friendrequest:username_remove }] },
             {
                 $pull: {
@@ -73,7 +73,7 @@ userSchema.pre('deleteOne',{ document: true, query: false }, async function (nex
         next(err);
     }
 });
-const User= mongoose.model('Users',userSchema);
+const User= mongoose.model('UsersV2',userSchema);
 
 const groupSchema= new mongoose.Schema({
     groupId :{
@@ -144,7 +144,7 @@ const groupSchema= new mongoose.Schema({
         }
     ]
 });
-const Group=mongoose.model("Groups",groupSchema);
+const Group=mongoose.model("GroupsV2",groupSchema);
 
 //for authorizing all pages using JWT
 function verify(req,res,next){
@@ -163,8 +163,10 @@ function verify(req,res,next){
 
 //create account
 app.post('/signup',async(req,res)=>{
-    let {username,password}=req.body;
+    let {username,password,email}=req.body;
     username=username.toLowerCase();
+    email=email.toLowerCase();
+
     const user_exist=await User.findOne({username});
     if (user_exist){
         return res.json({
@@ -172,9 +174,16 @@ app.post('/signup',async(req,res)=>{
             message:'User already exist'
         });
     }
+    const email_exist=await User.findOne({email});
+    if (email_exist){
+        return res.json({
+            success:false,
+            message:'Email already exist'
+        });
+    }
      //change salt rounds when necessary
     password=await bcrypt.hash(password,12);
-    await new User({username,password}).save();
+    await new User({username,email,password}).save();
     const token=jwt.sign({username},JWTKey,{expiresIn:'1h'});
     res.json({
         success:true,
@@ -187,7 +196,9 @@ app.post('/signup',async(req,res)=>{
 app.post('/login',async (req,res)=>{
     let {username,password}=req.body;
     username=username.toLowerCase();
-    const user_cred=await User.findOne({username});
+    const user_cred=await User.findOne({
+        $or:[{username:username},{email:username}]
+    });
     if (!user_cred){
         return res.json({
             success:false,
@@ -202,10 +213,12 @@ app.post('/login',async (req,res)=>{
             message:"Invalid credentials"
             });
         }
+    username=user_cred.username;
     const token=jwt.sign({username},JWTKey,{expiresIn:'1h'});
     res.json({
         success:true,
-        token
+        token,
+        username
     });
 });
 

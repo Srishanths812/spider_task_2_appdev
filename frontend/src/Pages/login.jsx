@@ -13,7 +13,7 @@ const Login =()=>{
     const [password, setPassword]= useState('');
     const [message, setMessage]= useState('');
 
-    const Backend_URL='http://localhost:3000';
+    const Backend_URL=import.meta.env.VITE_backend_url;
 
     const formHandle= async(e)=>{
         e.preventDefault();
@@ -31,7 +31,7 @@ const Login =()=>{
 
             if (data.success){
                 localStorage.setItem("Token",data.token);
-                localStorage.setItem("Username",username);
+                localStorage.setItem("Username",data.username);
                 Navigate("/main");
             }
             else{
@@ -65,7 +65,7 @@ const Login =()=>{
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <p className="label text-red-600 p-1">*required</p>
+            <p className="label text-red-600">*required</p>
           </div>
           <div>
             <label className="label text-gray-700">
@@ -86,7 +86,7 @@ const Login =()=>{
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150"
           >
-            Login In
+            Log In
           </button>
           <button
             type="button"
@@ -95,6 +95,13 @@ const Login =()=>{
           >
             Sign Up
           </button>
+          {/* <button
+            type="button"
+            onClick= {()=> Navigate("/forgotpassword")}
+            className="w-full bg-yellow-500 text-white py-2 px-4 rounded-md font-semibold hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-violet-300 focus:ring-offset-2 transition ease-in-out duration-150"
+          >
+            Forgot Password
+          </button> */}
         </form>
         {message && (
           <p className={`mt-6 text-center text-md ${message.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
