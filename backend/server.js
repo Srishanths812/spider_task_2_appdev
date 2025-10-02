@@ -67,7 +67,7 @@ userSchema.pre('deleteOne',{ document: true, query: false }, async function (nex
         next(err);
     }
 });
-const User= mongoose.model('UsersV2',userSchema);
+const User= mongoose.model('UsersV3',userSchema);
 
 const groupSchema= new mongoose.Schema({
     groupId :{
